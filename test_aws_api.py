@@ -3,7 +3,7 @@ import requests
 import pprint
 
 # Define endpoint URL
-URL = "http://13.63.180.226:8000/process"
+URL = "http://127.0.0.1:8000/process"
 
 # Find the test.wav file. It could be in the current directory or the parent directory
 possible_paths = ["test.wav", "../test.wav", "ATC-AI/test.wav"]
