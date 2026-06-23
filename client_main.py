@@ -13,7 +13,7 @@ import keyboard
 import xpc
 
 # Define endpoints and settings
-URL = "http://127.0.0.1:8000/process"
+URL = "http://13.63.180.226:8000/process"
 AUDIO_FILE_INPUT = "pilot_request.wav"
 AUDIO_FILE_OUTPUT = "atc_response.wav"
 
