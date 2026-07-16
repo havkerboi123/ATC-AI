@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+requests
+groq
+google-genai
+python-dotenv
+pydantic
+airportsdata
+numpy
+sounddevice
+soundfile
+keyboard
