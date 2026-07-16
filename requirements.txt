@@ -1,8 +1,8 @@
 fastapi
 uvicorn
 python-multipart
-requests
 groq
-google-genai
 python-dotenv
-pydantic
+requests
+airportsdata
+google-genai
