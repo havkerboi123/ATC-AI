@@ -1,8 +1,13 @@
 fastapi
 uvicorn
 python-multipart
-groq
-python-dotenv
 requests
-airportsdata
+groq
 google-genai
+python-dotenv
+pydantic
+airportsdata
+numpy
+sounddevice
+soundfile
+keyboard

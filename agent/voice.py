@@ -7,16 +7,15 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
-GEMINI_API_KEY= os.getenv("GEMINI_API_KEY")
-XAI_API_KEY=os.getenv("XAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+XAI_API_KEY = os.getenv("XAI_API_KEY")
 
 #We use the xAI speech to text api here
 def get_text(audio_path: str) -> dict:
     """Speech-to-text using xAI. Accepts .wav or .mp3"""
     ext = audio_path.split(".")[-1]
     mime = "audio/wav" if ext == "wav" else "audio/mpeg"
-    
+
     with open(audio_path, "rb") as f:
         response = requests.post(
             "https://api.x.ai/v1/stt",
@@ -46,12 +45,10 @@ def get_speech(text: str, output_path: str = "out.wav") -> str:
             ),
         ),
     )
-
     pcm = response.candidates[0].content.parts[0].inline_data.data
     with wave.open(output_path, "wb") as wf:
         wf.setnchannels(1)
         wf.setsampwidth(2)
         wf.setframerate(24000)
         wf.writeframes(pcm)
-
     return output_path

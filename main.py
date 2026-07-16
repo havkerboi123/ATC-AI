@@ -13,7 +13,7 @@ app = FastAPI()
 @app.post("/process")
 async def process(
     audio: UploadFile = File(...),
-    data: str = Form(default="{}")
+    data: str = Form(...)
 ):
     # Save uploaded file temporarily
     ext = audio.filename.split(".")[-1]
@@ -21,20 +21,29 @@ async def process(
     input_path = os.path.join(temp_dir, f"{uuid.uuid4()}.{ext}")
     output_path = os.path.join(temp_dir, f"{uuid.uuid4()}.wav")
 
+    print("\n" + "="*60)
+    print("Received request at local /process")
+    print(f"Audio file: {audio.filename}")
+
     with open(input_path, "wb") as f:
         f.write(await audio.read())
 
     # STT → LLM → TTS
     result = get_text(input_path)
     text = result["text"]
+    print(f"Transcribed Text: '{text}'")
 
     try:
         telemetry = json.loads(data)
+        print(f"Parsed Telemetry from Client: {json.dumps(telemetry, indent=4)}")
     except Exception as e:
         print(f"Failed to parse telemetry JSON: {e}")
+        print(f"Raw data string: {data}")
         telemetry = None
 
     response_text = get_response(text, telemetry)
+    print(f"Groq Response Text: '{response_text}'")
+    print("="*60 + "\n")
 
     get_speech(response_text, output_path)
 
